@@ -1,0 +1,26 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  annotations:
+    build.appstudio.openshift.io/application: stephanie-app
+    build.appstudio.openshift.io/build: "true"
+    build.appstudio.openshift.io/component: inventory-quarkus
+    build.appstudio.openshift.io/type: build
+    build.appstudio.openshift.io/version: "0.1"
+    pipelines.appstudio.openshift.io/type: build
+  creationTimestamp: null
+  name: inventory-quarkus
+  namespace: yangcao
+spec:
+  namespaceSelector: {}
+  resources: {}
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - kind: ClusterTriggerBinding
+      ref: github-push
+    template:
+      ref: inventory-quarkus
+status:
+  configuration:
+    generatedName: ""
